@@ -13,16 +13,15 @@ steps:
   inputs:
     secureFile: 'azure_rsa.pub'
 
-- task: JasonBJohnson.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@2
-  displayName: install terraform
+# - task: JasonBJohnson.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@2
+#   displayName: install terraform
 
-- task: TerraformCLI@2
+- task: TerraformCLI@0
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    # commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
-#    backendServiceArm: 'Azure subscription 1(843ba4a5-1cb5-402f-b8fc-1e97e369f04a)'
     backendServiceArm: 'azure-resource-manager-service-connection'
     ensureBackend: true
     backendAzureRmResourceGroupName: 'terraform-backend-rg'
@@ -30,7 +29,13 @@ steps:
     backendAzureRmStorageAccountName: 'storacctsophia19053xyz'
     backendAzureRmContainerName: 'storacctsophia19053container'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
-    allowTelemetryCollection: true
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    environmentServiceName: 'azure-resource-manager-service-connection'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
 
 # - task: TerraformCLI@2
 #   inputs:
