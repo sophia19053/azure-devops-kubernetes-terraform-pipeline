@@ -13,8 +13,8 @@ steps:
   inputs:
     secureFile: 'azure_rsa.pub'
 
-# - task: JasonBJohnson.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@2
-#   displayName: install terraform
+- task: JasonBJohnson.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@2
+  displayName: install terraform
 
 - task: TerraformCLI@0
   inputs:
