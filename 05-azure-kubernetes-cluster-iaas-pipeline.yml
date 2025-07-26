@@ -16,7 +16,7 @@ steps:
 - task: JasonBJohnson.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@2
   displayName: install terraform
 
-- task: TerraformCLI@0
+- task: TerraformCLI@2
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
@@ -30,7 +30,7 @@ steps:
     backendAzureRmContainerName: 'storacctsophia19053container'
     backendAzureRmKey: 'kubernetes-dev.tfstate'
 
-- task: TerraformCLI@0
+- task: TerraformCLI@2
   inputs:
     command: 'apply'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
