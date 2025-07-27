@@ -37,15 +37,8 @@ steps:
     environmentServiceName: 'azure-resource-manager-service-connection'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
 
-# - task: TerraformCLI@2
-#   inputs:
-#     command: 'init'
-#     backendType: 'azurerm'
-#     backendServiceArm: 'azure-resource-manager-service-connection'
-#     ensureBackend: true
-#     backendAzureRmResourceGroupName: 'terraform-backend-rg'
-#     backendAzureRmResourceGroupLocation: 'westeurope'
-#     backendAzureRmStorageAccountName: 'storageacctsophia19053xyz'
-#     backendAzureRmContainerName: 'storageacctsophia19053container'
-#     backendAzureRmKey: 'kubernetes-dev.tfstate'
-#     allowTelemetryCollection: false
+- task: TerraformCLI@2
+  inputs:
+    command: 'destroy'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    environmentServiceName: 'azure-resource-manager-service-connection'
