@@ -97,7 +97,7 @@ resource "kubernetes_cluster_role_binding" "example" {
   }
 }
 
-#resource "kubernetes_secret" "example" {
+resource "kubernetes_secret" "example" {
   metadata {
     annotations = {
       "kubernetes.io/service-account.name" = "default"
